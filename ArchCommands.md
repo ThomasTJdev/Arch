@@ -1035,4 +1035,21 @@ $ wget -O taglist.zip http://www.vim.org/scripts/download_script.php?src_id=770
 (echo >/dev/tcp/localhost/8080) &>/dev/null && echo "TCP port 8080 open" || echo "TCP port 8080 close"
 ```
 
+## 52. Find files larger than n (filesize)
+
+```
+# 40 largest files
+sudo du -x -h / | sort -h | tail -40
+
+# Sort by filesize in folder
+sudo du -s /var/log/* | sort -n
+```
+
+## 53. Set max size of journalctl
+
+```
+journalctl --vacuum-time=2d
+journalctl --vacuum-size=500M
+```
+
 
