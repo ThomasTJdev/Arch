@@ -520,32 +520,21 @@ This command is used to display the free, used, swap memory available in the sys
 Typical free command output. The output is displayed in bytes.
 
 ```
-$ free
-   total       used       free     shared    buffers     cached
-Mem:       3566408    1580220    1986188          0     203988     902960
--/+ buffers/cache:     473272    3093136
-Swap:      4000176          0    4000176
-```
+$ free -h
+              total        used        free      shared  buff/cache   available
+Mem:           983M        289M        172M        472K        521M        514M
+Swap:            0B          0B          0B
 
-If you want to quickly check how many GB of RAM your system has use the -g option. -b option displays in bytes, -k in kilo bytes, -m in mega bytes.
-
-```
-$ free -g
-   total       used       free     shared    buffers     cached
-Mem:             3          1          1          0          0          0
--/+ buffers/cache:          0          2
-Swap:            3          0          3
 ```
 
 If you want to see a total memory ( including the swap), use the -t switch, which will display a total line as shown below.
 
 ```
-ramesh@ramesh-laptop:~$ free -t
-   total       used       free     shared    buffers     cached
-Mem:       3566408    1592148    1974260          0     204260     912556
--/+ buffers/cache:     475332    3091076
-Swap:      4000176          0    4000176
-Total:     7566584    1592148    5974436
+$ free -ht
+              total        used        free      shared  buff/cache   available
+Mem:           983M        289M        172M        472K        521M        514M
+Swap:            0B          0B          0B
+Total:         983M        289M        172M
 ```
 
 ## 24. top command examples
@@ -582,7 +571,7 @@ Filesystem   1K-blocks      Used Available Use% Mounted on
 df -h displays output in human readable form. i.e size will be displayed in GB’s.
 
 ```
-ramesh@ramesh-laptop:~$ df -h
+$ df -h
 Filesystem   Size  Used Avail Use% Mounted on
 /dev/sda1              29G  3.1G   24G  12% /
 /dev/sda2             115G   48G   62G  44% /home
@@ -591,7 +580,7 @@ Filesystem   Size  Used Avail Use% Mounted on
 Use -T option to display what type of file system.
 
 ```
-ramesh@ramesh-laptop:~$ df -T
+$ df -T
 Filesystem    Type   1K-blocks   Used Available Use% Mounted on
 /dev/sda1     ext4    29530400   3233120  24797216  12% /
 /dev/sda2     ext4   120367992  50171596  64082060  44% /home
@@ -1050,6 +1039,20 @@ sudo du -s /var/log/* | sort -n
 ```
 journalctl --vacuum-time=2d
 journalctl --vacuum-size=500M
+```
+
+## 54. Process memory usage
+
+```
+# Change nginx to the process name
+ps -A -o pid,rss,command | grep nginx | grep -v grep | awk '{total+=$2}END{printf("%dMb", total/1024)}'
+```
+
+## 55. Check if reboot is required
+
+```
+# If the file exists, reboot is required (warning this might not work on all distros)
+ls /var/run/reboot-required
 ```
 
 
