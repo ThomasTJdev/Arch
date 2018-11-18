@@ -1,109 +1,5 @@
 # General commands
 
-=## Commands=
-
-This page contains basic and good linux knowledge.
-
-## Find command
-
-The linux find command.
-
-### Standard search
-
-To find a file by name. This will be case sensitive, meaning a search for "file" is different than a search for "File". Type:
-
-```
-find -name "query"
-```
-
-To find a file by name, but ignore the case of the query, type:
-
-```
-find -iname "query"
-```
-
-If you want to find all files that don't adhere to a specific pattern, you can invert the search with "-not" or "!". If you use "!", you must escape the character so that bash does not try to interpret it before find can act:
-
-```
-find -not -name "query_to_avoid"
-```
-
-Or
-
-```
-find \! -name "query_to_avoid"
-```
-
-Regex just include asterix (*):
-
-```
-find -iname "*uer*"
-```
-
-### Search in current and subfolders
-
-The dot defines, that the search is in the current directory and subdirectories.
-
-```
-find . -name "foo"
-```
-### Search in specific folder
-
-```
-find /home/user/Downloads -iname "foo"
-```
-
-### Links:
-
-[[https://www.digitalocean.com/community/tutorials/how-to-use-find-and-locate-to-search-for-files-on-a-linux-vps|https://www.digitalocean.com/community/tutorials/how-to-use-find-and-locate-to-search-for-files-on-a-linux-vps]]
-
-## Time since boot
-
-Time: ''uptime''
-
-Boottime: ''date -d "$(</proc/uptime awk '{print $1}') seconds ago"''
-## Check if service is running else start it
-
-Create script: ''nano checkService.sh''
-
-Insert check-code - remember to change the service (service needs to be located in init.d - might need to do service XX enable):
-
-```
-#!/bin/sh
-
-#ps auxw | grep apache2 | grep -v grep> /dev/null
-#if [ $? != 0 ]
-if pgrep "apache2" </dev/null
-then
-   /etc/init.d/apache2 start> /dev/null
-fi
-```
-
-Make it executable: ''chmod +x checkService.sh''
-### Add it to crontab
-
-Open cron - is it a root job? Then do sudo: ''sudo crontab -e''
-
-Run every 6th hour, add to bottom: ''0 */6 * * * /path/to/checkService.sh''
-
-Help to cron format: http://crontab.guru/
-
-
-## Start, Enable, Disable services
-
-Beaware for service or systemctl.
-
-Start service: ''systemctl start serviceXX''
-
-Stop service: ''systemctl stop serviceXX''
-
-Enable service (will hook it to init.d): ''systemctl enable serviceXX''
-
-Disable service (remove hook): ''systemctl disable serviceXX''
-
-
-==## General commands==
-
 ## 1. tar command examples
 
 Create a new tar archive.
@@ -1054,5 +950,112 @@ ps -A -o pid,rss,command | grep nginx | grep -v grep | awk '{total+=$2}END{print
 # If the file exists, reboot is required (warning this might not work on all distros)
 ls /var/run/reboot-required
 ```
+
+
+## 56. Find command
+
+The linux find command.
+
+### Standard search
+
+To find a file by name. This will be case sensitive, meaning a search for "file" is different than a search for "File". Type:
+
+```
+find -name "query"
+```
+
+To find a file by name, but ignore the case of the query, type:
+
+```
+find -iname "query"
+```
+
+If you want to find all files that don't adhere to a specific pattern, you can invert the search with "-not" or "!". If you use "!", you must escape the character so that bash does not try to interpret it before find can act:
+
+```
+find -not -name "query_to_avoid"
+```
+
+Or
+
+```
+find \! -name "query_to_avoid"
+```
+
+Regex just include asterix (*):
+
+```
+find -iname "*uer*"
+```
+
+### Search in current and subfolders
+
+The dot defines, that the search is in the current directory and subdirectories.
+
+```
+find . -name "foo"
+```
+### Search in specific folder
+
+```
+find /home/user/Downloads -iname "foo"
+```
+
+### Links:
+
+[[https://www.digitalocean.com/community/tutorials/how-to-use-find-and-locate-to-search-for-files-on-a-linux-vps|https://www.digitalocean.com/community/tutorials/how-to-use-find-and-locate-to-search-for-files-on-a-linux-vps]]
+
+### Alternativ way - mlocate
+
+```
+sudo pacman -Ss mlocate
+sudo updatedb
+locate specialFile
+```
+
+## 57. Time since boot
+
+Time: ''uptime''
+
+Boottime: ''date -d "$(</proc/uptime awk '{print $1}') seconds ago"''
+## 58. Check if service is running else start it
+
+Create script: ''nano checkService.sh''
+
+Insert check-code - remember to change the service (service needs to be located in init.d - might need to do service XX enable):
+
+```
+#!/bin/sh
+
+#ps auxw | grep apache2 | grep -v grep> /dev/null
+#if [ $? != 0 ]
+if pgrep "apache2" </dev/null
+then
+   /etc/init.d/apache2 start> /dev/null
+fi
+```
+
+Make it executable: ''chmod +x checkService.sh''
+### Add it to crontab
+
+Open cron - is it a root job? Then do sudo: ''sudo crontab -e''
+
+Run every 6th hour, add to bottom: ''0 */6 * * * /path/to/checkService.sh''
+
+Help to cron format: http://crontab.guru/
+
+
+## 59. Start, Enable, Disable services
+
+Beaware for service or systemctl.
+
+Start service: ''systemctl start serviceXX''
+
+Stop service: ''systemctl stop serviceXX''
+
+Enable service (will hook it to init.d): ''systemctl enable serviceXX''
+
+Disable service (remove hook): ''systemctl disable serviceXX''
+
 
 
