@@ -38,7 +38,7 @@ PS1="[033[38;5;10m]u\[$(tput sgr0)][\033[38;5;15m\]@\[$(tput sgr0)][\033[38;5;12
 
 Include git branch in git folders:
 ```
-PS1="[\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;81m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\]: \[$(tput sgr0)\]\[\033[38;5;81m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]]\[\033[0;32m\]$(if git rev-parse --git-dir > /dev/null 2>&1; then echo " - ["; fi)$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\033[0;32m\]$(if git rev-parse --git-dir > /dev/null 2>&1; then echo "]"; fi)\[\033[0m\033[0;15m\] \\$\[$(tput sgr0)\] "
+PS1='[\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;81m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\]: \[$(tput sgr0)\]\[\033[38;5;81m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]]\[\033[0;32m\]$(if git rev-parse --git-dir > /dev/null 2>&1; then echo " - ["; fi)$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\033[0;32m\]$(if git rev-parse --git-dir > /dev/null 2>&1; then echo "]"; fi)\[\033[0m\033[0;15m\] \\$\[$(tput sgr0)\] '
 ```
 
 ### Do it
