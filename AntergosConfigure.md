@@ -1,6 +1,6 @@
 # Configure
 
-## Bash
+## Bash colorize
 
 Configure color to indicate route.
 
@@ -50,4 +50,30 @@ nano ~/.bashrc
 ```
 
 ''Replace PS1''
+
+
+
+## Bash alias
+
+```
+echo 'alias "l=ls -lah"' >> ~/.bashrc
+```
+
+
+## Pacman
+
+`sudo nano /etc/pacman.conf`
+
+Make the changes:
+```
+IgnorePkg = postgresql*
+# --
+Color
+TotalDownload
+CheckSpace
+VerbosePkgLists
+# --
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+```
 
